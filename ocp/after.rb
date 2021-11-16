@@ -1,23 +1,23 @@
 class Logger
   def initialize
-    @prefix = "#{Time.now.strftime('%d-%b-%Y %H:%M:%S')} -->"
+    @format = '%d-%b-%Y %H:%M:%S -->'
   end
 
   def log(message)
-    $stdout.write "#{@prefix} #{message}"
+    prefix = Time.now.strftime @format
+    $stdout.write "#{prefix} #{message}\n"
   end
 end
 
 class CustomLogger < Logger
   def initialize
     super
-    @prefix = "#{Time.now.strftime('%H:%M:%S')} -->"
+    @format = '%H:%M:%S -->'
   end
 end
 
 logger = Logger.new
 logger.log 'hi'
-
 puts '======'
 
 c_logger = CustomLogger.new

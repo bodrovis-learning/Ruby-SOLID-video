@@ -1,6 +1,6 @@
 class TerminalPrinter
   def write(msg, _opts)
-    $stdout.write "#{@prefix} #{msg}"
+    $stdout.write "#{@prefix} #{msg}\n"
   end
 end
 
@@ -17,11 +17,12 @@ end
 
 class Logger
   def initialize
-    @prefix = "#{Time.now.strftime('%d-%b-%Y %H:%M:%S')} -->"
+    @format = '%d-%b-%Y %H:%M:%S -->'
   end
 
   def log(msg:, printer: TerminalPrinter, opts: {})
-    printer.new.write "#{@prefix} #{msg}", opts
+    prefix = Time.now.strftime @format
+    printer.new.write "#{prefix} #{msg}", opts
   end
 end
 
